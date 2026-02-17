@@ -15,15 +15,9 @@ import mongoose from 'mongoose';
 
 
 const app= express();
-app.use(cors({
-  origin: ['http://localhost:5173',
-  'https://revasjobportal.netlify.app'],
-      methods: ['GET', 'POST', 'PUT', 'DELETE'],  // Define allowed methods
-    credentials: true,  // Include credentials like cookies if needed
-}));
+app.use(cors())
 
-  
-  
+   
   app.use(express.json())
 DBConnection()
 const port = process.env.PORT
