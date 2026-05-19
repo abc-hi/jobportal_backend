@@ -5,7 +5,7 @@ import authMiddleware from '../Middleware/AuthMiddleware.js';
 
 const router = express.Router();
 
-router.post("/apply-job/:jobId",authMiddleware,upload.single('resume'),applyJob);
+router.post("/apply-job/:jobid",authMiddleware,upload.single('resume'),applyJob);
 // upload.single('resume')- ulter middleware.
 // handles:
 

@@ -67,7 +67,17 @@ const authMiddleware = async (req, res, next) => {
   try {
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
     const user = await User.findById(decoded.id);
+
+//     decoded = {
+//   id: "64f123abc...",   // same user._id
+//   iat: 1234567890,
+//   exp: 1234569999
+// }
+
+
     if (!user) return res.status(401).json({ message: "User not found" });
+
+// Now you take the user ID from token and check DB:“Does this user actually exist in MongoDB?
 
     req.user = user;
 //     Attach user data to request object

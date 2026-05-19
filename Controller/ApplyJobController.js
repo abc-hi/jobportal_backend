@@ -10,16 +10,17 @@ import fs from "fs";
 
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
-    const dir = "uploads";
+    const dir = "uploads";        //Save all uploaded files inside a folder called uploads
 
     if (!fs.existsSync(dir)) {
-      fs.mkdirSync(dir);
+      fs.mkdirSync(dir);    //create upload folder if not exist
     }
 
     cb(null, dir);
+    // “No error (null), save file inside uploads folder”
   },
   filename: (req, file, cb) => {
-    cb(null, Date.now() + path.extname(file.originalname));
+    cb(null, Date.now() + path.extname(file.originalname));   //Rename uploaded file to something unique
   }
 });
 export const upload = multer({storage})
@@ -27,18 +28,26 @@ export const upload = multer({storage})
 const applyJob = async(req,res)=>{
 
     try {
-console.log("🔥 APPLY JOB CONTROLLER HIT");
+
       console.log("req.user:", req.user);
 console.log("req.params:", req.params);
 console.log("req.file:", req.file);
 
 
-      const jobId = req.params.jobId;  // from URL
+      const jobId = req.params.jobid;  // from URL
+
+      // req.user = {
+//   _id: "64f123...",
+//   name: "...",
+
+
     const userId = req.user._id;     // from auth middleware
 //     above line ONLY works because:
 // frontend sends token
 // middleware verifies token
 // middleware attaches user to req
+
+
    
     const resumePath = req.file ? req.file.path : null;
 

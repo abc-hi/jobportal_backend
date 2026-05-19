@@ -27,6 +27,13 @@ const LoginControllerfn = async (req, res) => {
 
         // Generate a JWT token
         const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: "1hr" });
+
+// token payload
+// {
+//   id: "64f123abc..."   // this is user._id
+// }
+// decoded.id === user._id
+
         //this token belongs to this user
         user.token = token;
     //   Save token inside user document.
