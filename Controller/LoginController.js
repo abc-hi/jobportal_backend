@@ -27,10 +27,17 @@ const LoginControllerfn = async (req, res) => {
 
         // Generate a JWT token
         const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: "1hr" });
+        //this token belongs to this user
         user.token = token;
+    //   Save token inside user document.
         await user.save();
+      
+        // Without secret:anyone can fake tokens 
+// With secret:backend can verify token is genuine
+
 
         return res.status(200).json({ message: "Login Successful", token: token,user});
+        // if pwd match with hashed pwd then token generated at logincontroller of backend and sent to frontend there token is saved into localstorage and send to backend via api (ex applyjob) to backend there it verifies token against user and successful the applyjob operation
 
     } catch (error) {
         console.error("Error occurred during login:", error);

@@ -6,6 +6,7 @@ import multer from 'multer'
 import path from 'path'
 
 
+
 const storage = multer.diskStorage({
     destination:(req,file,cb)=>{
         cb(null, './uploads')    
@@ -19,19 +20,32 @@ export const upload = multer({storage})
 const applyJob = async(req,res)=>{
 
     try {
+console.log("🔥 APPLY JOB CONTROLLER HIT");
+      console.log("req.user:", req.user);
+console.log("req.params:", req.params);
+console.log("req.file:", req.file);
+
+
       const jobId = req.params.jobId;  // from URL
     const userId = req.user._id;     // from auth middleware
+//     above line ONLY works because:
+// frontend sends token
+// middleware verifies token
+// middleware attaches user to req
    
     const resumePath = req.file ? req.file.path : null;
 
     // Find the user
     const user = await User.findById(userId);
+    console.log("USER ID:", userId);
     if (!user) return res.status(404).json({ message: "User not found" });
-
+console.log("user:", user)
+console.log("appliedJobs:", user.appliedJobs)
     // Check if job already applied
     if (user.appliedJobs.includes(jobId)) {
       return res.status(400).json({ message: "You have already applied for this job" });
     }
+    //400 is error code here it is duplicate like already applied
 
     // Add job to appliedJobs
     user.appliedJobs.push(jobId);
