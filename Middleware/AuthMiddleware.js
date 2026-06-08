@@ -68,12 +68,22 @@ const authMiddleware = async (req, res, next) => {
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
     const user = await User.findById(decoded.id);
 
+    
 //     decoded = {
 //   id: "64f123abc...",   // same user._id
 //   iat: 1234567890,
 //   exp: 1234569999
 // }
+// in this case req.user.id is used in controller
 
+// // findById() queries MongoDB and returns the actual user full document not just only id:
+// // so decoded ={
+// //   _id: "64f123abc...",
+// //   name: "Revathi",
+// //   email: "abc@gmail.com",
+// //   role: "user"
+// // }
+// in this case req.user._id is used in controller
 
     if (!user) return res.status(401).json({ message: "User not found" });
 

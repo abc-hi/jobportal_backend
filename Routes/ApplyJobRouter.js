@@ -6,6 +6,19 @@ import authMiddleware from '../Middleware/AuthMiddleware.js';
 const router = express.Router();
 
 router.post("/apply-job/:jobid",authMiddleware,upload.single('resume'),applyJob);
+
+// frontend url has _id but here Jobid.
+// /apply-job/${_id}
+// becomes:
+// /apply-job/695fa593514f70adc54b4bbf
+// Backend does NOT see _id or jobid from frontend
+// 👉 It only sees:
+// /apply-job/695fa593514f70adc54b4bbf
+// and assigns:
+// req.params.jobid = "695fa593514f70adc54b4bbf"(from applyjob controller  const jobId = req.params.jobid;)
+
+
+
 // upload.single('resume')- ulter middleware.
 // handles:
 
