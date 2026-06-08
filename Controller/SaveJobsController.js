@@ -48,7 +48,7 @@ export const saveJobs = async (req, res) => {
     user.savedJobs.push(jobId);
     await user.save();
 
-    res.status(200).json({ message: "Job saved successfully" });
+    res.status(200).json({ message: "Job has been saved successfully" });
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: "Failed to save job" });
