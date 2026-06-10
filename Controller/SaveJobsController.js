@@ -33,7 +33,24 @@ export const saveJobs = async (req, res) => {
   try {
     const jobId = req.body.jobId;
 
+    // since here i sent jobid by body, in frontend i used 
+    //  const res=await axios.post(
+            //                       "https://jobportal-backend-x18f.onrender.com/api/save-job",
+
+            // { jobId: _id },
+
+            // we may also keep JobId as url param in both frontend and backend
+
+            // req.params → value comes from URL (/job/123)
+// req.body → value comes from request payload ({ jobId: "123" })
+// req.query → value comes from query string (?jobId=123)
+
+
+
+
+
     //  userId comes from token via auth middleware
+
     const userId = req.user._id;
 
     const user = await User.findById(userId);

@@ -32,3 +32,22 @@ res.status(500).json({message:"Internal server error"})
     }
 
 }
+
+
+// return res.status(500).json({
+//   message: "Internal server error",
+//   error
+// });
+
+// ✔ What it does:
+// Sends response to frontend
+// STOPS the function immediately
+// No further code runs after this
+
+// ✔ ALWAYS use return when:
+// sending error response
+// using if conditions
+// stopping execution
+
+// without returnSends response
+// BUT code continues running below it

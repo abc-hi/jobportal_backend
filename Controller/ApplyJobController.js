@@ -70,7 +70,7 @@ console.log("appliedJobs:", user.appliedJobs)
     if (resumePath) user.resume = resumePath;
 await user.save();
 
-    res.status(200).json({ message: "Job applied successfully", data: user });
+    res.status(200).json({ message: "Job has been applied successfully", data: user });
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: "Internal server error", error });
@@ -79,6 +79,7 @@ await user.save();
 }
 export default applyJob;
 
+// frontend send info(name,exp,salary,expsummary etc) are recived in backedn but here backend just assing jobid to user ,it doesnot require them
 
 // const storage = multer.diskStorage({
 // multer.diskStorage() is a function from multer that lets you configure how files are stored on your disk.
